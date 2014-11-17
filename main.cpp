@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <iterator>
+#include <typeinfo>
 
 //Templated implementation of quicksort
 template <typename T>
@@ -53,6 +54,7 @@ void quickSort(std::vector<T> &aVector, int left, int right)
 template <typename T>
 void printVector(std::vector<T> &aVector)
 {
+    std::cout << "Printing a vector with elements of type: " << typeid(T).name() << std::endl;
     std::ostream_iterator<T> output(std::cout, " ");
     std::copy(aVector.begin(), aVector.end(), output);
     std::cout << std::endl;
@@ -62,18 +64,18 @@ void printVector(std::vector<T> &aVector)
 int main()
 {
     std::vector<int> aVector = {22, 12, 23, 35, 1, 2};
-    std::cout << "Vector of integers before quicksort: ";
+    std::cout << "Vector of integers before quicksort: " << std::endl;
     printVector(aVector);
     quickSort(aVector, 0, aVector.size()-1);
-    std::cout << "Vector of integers after quicksort: ";
+    std::cout << "Vector of integers after quicksort: " << std::endl;
     printVector(aVector);
     std::cout << std::endl;
 
     std::vector<double> aBVector = {12.23, 12.34, 34.53, 56.23, 1.23};
-    std::cout << "Vector of doubles before quicksort: ";
+    std::cout << "Vector of doubles before quicksort: " << std::endl;
     printVector(aBVector);
     quickSort(aBVector, 0, aBVector.size()-1);
-    std::cout << "Vector of doubles after quicksort: ";
+    std::cout << "Vector of doubles after quicksort: " << std::endl;
     printVector(aBVector);
     std::cout << std::endl;
 
