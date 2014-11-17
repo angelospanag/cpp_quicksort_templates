@@ -2,34 +2,54 @@
 #include <vector>
 #include <iterator>
 
+//Templated implementation of quicksort
 template <typename T>
-void quickSort(std::vector<T> &arr, int left, int right) {
-      int i = left, j = right;
-      T tmp;
-      T pivot = arr[(left + right) / 2];
+void quickSort(std::vector<T> &aVector, int left, int right)
+{
+    int i = left;
+    int j = right;
 
-      /* partition */
-      while (i <= j) {
-            while (arr[i] < pivot)
-                  i++;
-            while (arr[j] > pivot)
-                  j--;
-            if (i <= j) {
-                  tmp = arr[i];
-                  arr[i] = arr[j];
-                  arr[j] = tmp;
-                  i++;
-                  j--;
-            }
-      }
+    T tmp;
+    T pivot = aVector[(left + right) / 2];
 
-      /* recursion */
-      if (left < j)
-            quickSort(arr, left, j);
-      if (i < right)
-            quickSort(arr, i, right);
+    //Partition step
+    while (i <= j)
+    {
+        //Move left pointer to the right
+        while (aVector[i] < pivot)
+        {
+            i++;
+        }
+
+        //Move right pointer to the left
+        while (aVector[j] > pivot)
+        {
+            j--;
+        }
+
+        //Swapping step
+        if (i <= j)
+        {
+            tmp = aVector[i];
+            aVector[i] = aVector[j];
+            aVector[j] = tmp;
+            i++;
+            j--;
+        }
+    }
+
+    //Recursion step
+    if (left < j)
+    {
+        quickSort(aVector, left, j);
+    }
+    if (i < right)
+    {
+        quickSort(aVector, i, right);
+    }
 }
 
+//Templated function to print the elements of a vector
 template <typename T>
 void printVector(std::vector<T> &aVector)
 {
@@ -38,6 +58,7 @@ void printVector(std::vector<T> &aVector)
     std::cout << std::endl;
 }
 
+//Main function
 int main()
 {
     std::vector<int> aVector = {22, 12, 23, 35, 1, 2};
